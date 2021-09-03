@@ -1,6 +1,5 @@
 import csv
 import json
-import logging
 from datetime import timedelta
 from io import StringIO
 from typing import Dict, List, Optional
@@ -16,9 +15,10 @@ from bot.constants import Metabase as MetabaseConfig, Roles
 from bot.converters import allowed_strings
 from bot.utils import send_to_paste_service
 from bot.utils.channel import is_mod_channel
+from bot.utils.logging import get_logger
 from bot.utils.scheduling import Scheduler
 
-log = logging.getLogger(__name__)
+log = get_logger(__name__)
 
 BASE_HEADERS = {
     "Content-Type": "application/json"

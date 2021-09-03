@@ -1,12 +1,11 @@
-import logging
-
 from discord.ext.commands import Cog
 
 from bot import constants
 from bot.bot import Bot
+from bot.utils.logging import get_logger
 
 
-log = logging.getLogger(__name__)
+log = get_logger(__name__)
 
 
 class ConfigVerifier(Cog):

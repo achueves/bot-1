@@ -1,5 +1,4 @@
 import abc
-import logging
 import typing as t
 from collections import namedtuple
 
@@ -9,8 +8,9 @@ from more_itertools import chunked
 
 import bot
 from bot.api import ResponseCodeError
+from bot.utils.logging import get_logger
 
-log = logging.getLogger(__name__)
+log = get_logger(__name__)
 
 CHUNK_SIZE = 1000
 

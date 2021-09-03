@@ -2,7 +2,7 @@ import logging
 import unittest
 import unittest.mock
 
-
+from bot.utils.logging import get_logger
 from tests.base import LoggingTestsMixin, _CaptureLogHandler
 
 
@@ -15,7 +15,7 @@ class LoggingTestCaseTests(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.log = logging.getLogger(__name__)
+        cls.log = get_logger(__name__)
 
     def test_assert_not_logs_does_not_raise_with_no_logs(self):
         """Test if LoggingTestCase.assertNotLogs does not raise when no logs were emitted."""

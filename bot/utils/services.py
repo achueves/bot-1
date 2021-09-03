@@ -6,7 +6,7 @@ from aiohttp import ClientConnectorError
 import bot
 from bot.constants import URLs
 
-log = logging.getLogger(__name__)
+log = logging.getLogger(__name__)  # use logging.getLogger (not bot.utils.logging.get_logger) to prevent circular import
 
 FAILED_REQUEST_ATTEMPTS = 3
 

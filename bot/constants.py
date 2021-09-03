@@ -9,7 +9,6 @@ the custom configuration. Any settings left
 out in the custom user configuration will stay
 their default values from `config-default.yml`.
 """
-
 import logging
 import os
 from collections.abc import Mapping
@@ -25,7 +24,7 @@ try:
 except ModuleNotFoundError:
     pass
 
-log = logging.getLogger(__name__)
+log = logging.getLogger(__name__)  # use logging.getLogger (not bot.utils.logging.get_logger) to prevent circular import
 
 
 def _env_var_constructor(loader, node):

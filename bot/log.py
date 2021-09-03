@@ -14,11 +14,27 @@ from bot import constants
 TRACE_LEVEL = 5
 
 
+class CustomLogger(Logger):
+    """Custom implementation of the `Logger` class with an added `trace` method."""
+
+    def trace(self, msg: str, *args, **kwargs) -> None:
+        """
+        Log 'msg % args' with severity 'TRACE'.
+
+        To pass exception information, use the keyword argument exc_info with
+        a true value, e.g.
+
+        logger.trace("Houston, we have an %s", "interesting problem", exc_info=1)
+        """
+        if self.isEnabledFor(TRACE_LEVEL):
+            self._log(TRACE_LEVEL, msg, args, **kwargs)
+
+
 def setup() -> None:
     """Set up loggers."""
     logging.TRACE = TRACE_LEVEL
     logging.addLevelName(TRACE_LEVEL, "TRACE")
-    Logger.trace = _monkeypatch_trace
+    logging.setLoggerClass(CustomLogger)
 
     format_string = "%(asctime)s | %(name)s | %(levelname)s | %(message)s"
     log_format = logging.Formatter(format_string)
@@ -71,19 +87,6 @@ def setup_sentry() -> None:
         ],
         release=f"bot@{constants.GIT_SHA}"
     )
-
-
-def _monkeypatch_trace(self: logging.Logger, msg: str, *args, **kwargs) -> None:
-    """
-    Log 'msg % args' with severity 'TRACE'.
-
-    To pass exception information, use the keyword argument exc_info with
-    a true value, e.g.
-
-    logger.trace("Houston, we have an %s", "interesting problem", exc_info=1)
-    """
-    if self.isEnabledFor(TRACE_LEVEL):
-        self._log(TRACE_LEVEL, msg, args, **kwargs)
 
 
 def _set_trace_loggers() -> None:

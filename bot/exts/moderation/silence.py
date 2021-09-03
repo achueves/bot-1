@@ -1,5 +1,4 @@
 import json
-import logging
 import typing
 from contextlib import suppress
 from datetime import datetime, timedelta, timezone
@@ -14,9 +13,10 @@ from bot import constants
 from bot.bot import Bot
 from bot.converters import HushDurationConverter
 from bot.utils.lock import LockedResourceError, lock, lock_arg
+from bot.utils.logging import get_logger
 from bot.utils.scheduling import Scheduler
 
-log = logging.getLogger(__name__)
+log = get_logger(__name__)
 
 LOCK_NAMESPACE = "silence"
 

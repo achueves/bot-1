@@ -1,4 +1,3 @@
-import logging
 import typing as t
 from datetime import timedelta
 from enum import Enum
@@ -11,8 +10,9 @@ import bot
 from bot import constants
 from bot.exts.help_channels import _caches, _message
 from bot.utils.channel import try_get_channel
+from bot.utils.logging import get_logger
 
-log = logging.getLogger(__name__)
+log = get_logger(__name__)
 
 MAX_CHANNELS_PER_CATEGORY = 50
 EXCLUDED_CHANNELS = (constants.Channels.cooldown,)

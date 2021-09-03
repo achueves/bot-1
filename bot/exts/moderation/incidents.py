@@ -1,5 +1,4 @@
 import asyncio
-import logging
 import typing as t
 from datetime import datetime
 from enum import Enum
@@ -9,9 +8,10 @@ from discord.ext.commands import Cog
 
 from bot.bot import Bot
 from bot.constants import Channels, Colours, Emojis, Guild, Webhooks
+from bot.utils.logging import get_logger
 from bot.utils.messages import sub_clyde
 
-log = logging.getLogger(__name__)
+log = get_logger(__name__)
 
 # Amount of messages for `crawl_task` to process at most on start-up - limited to 50
 # as in practice, there should never be this many messages, and if there are,

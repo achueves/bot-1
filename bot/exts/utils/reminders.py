@@ -1,5 +1,4 @@
 import asyncio
-import logging
 import random
 import textwrap
 import typing as t
@@ -19,11 +18,12 @@ from bot.converters import Duration, UnambiguousUser
 from bot.pagination import LinePaginator
 from bot.utils.checks import has_any_role_check, has_no_roles_check
 from bot.utils.lock import lock_arg
+from bot.utils.logging import get_logger
 from bot.utils.messages import send_denial
 from bot.utils.scheduling import Scheduler
 from bot.utils.time import TimestampFormats, discord_timestamp
 
-log = logging.getLogger(__name__)
+log = get_logger(__name__)
 
 LOCK_NAMESPACE = "reminder"
 WHITELISTED_CHANNELS = Guild.reminder_whitelist

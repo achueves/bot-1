@@ -1,5 +1,4 @@
 import difflib
-import logging
 from datetime import datetime, timedelta
 
 from discord import Colour, Embed
@@ -11,9 +10,10 @@ from bot.bot import Bot
 from bot.constants import Channels, MODERATION_ROLES
 from bot.converters import OffTopicName
 from bot.pagination import LinePaginator
+from bot.utils.logging import get_logger
 
 CHANNELS = (Channels.off_topic_0, Channels.off_topic_1, Channels.off_topic_2)
-log = logging.getLogger(__name__)
+log = get_logger(__name__)
 
 
 async def update_names(bot: Bot) -> None:

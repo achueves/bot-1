@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import asyncio
 import collections
-import logging
 from collections import defaultdict
 from contextlib import suppress
 from operator import attrgetter
@@ -14,10 +13,11 @@ from bs4 import BeautifulSoup
 import bot
 from bot.constants import Channels
 from bot.utils import scheduling
+from bot.utils.logging import get_logger
 from . import _cog, doc_cache
 from ._parsing import get_symbol_markdown
 
-log = logging.getLogger(__name__)
+log = get_logger(__name__)
 
 
 class StaleInventoryNotifier:

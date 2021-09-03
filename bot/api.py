@@ -1,13 +1,13 @@
 import asyncio
-import logging
 from typing import Optional
 from urllib.parse import quote as quote_url
 
 import aiohttp
 
 from .constants import Keys, URLs
+from .utils.logging import get_logger
 
-log = logging.getLogger(__name__)
+log = get_logger(__name__)
 
 
 class ResponseCodeError(ValueError):

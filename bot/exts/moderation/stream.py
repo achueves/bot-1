@@ -1,4 +1,3 @@
-import logging
 from datetime import timedelta, timezone
 from operator import itemgetter
 
@@ -15,10 +14,11 @@ from bot.constants import (
 )
 from bot.converters import Expiry
 from bot.pagination import LinePaginator
+from bot.utils.logging import get_logger
 from bot.utils.scheduling import Scheduler
 from bot.utils.time import discord_timestamp, format_infraction_with_duration
 
-log = logging.getLogger(__name__)
+log = get_logger(__name__)
 
 
 class Stream(commands.Cog):

@@ -1,4 +1,3 @@
-import logging
 from typing import Optional
 
 from discord import Colour, Embed
@@ -9,8 +8,9 @@ from bot.api import ResponseCodeError
 from bot.bot import Bot
 from bot.converters import ValidDiscordServerInvite, ValidFilterListType
 from bot.pagination import LinePaginator
+from bot.utils.logging import get_logger
 
-log = logging.getLogger(__name__)
+log = get_logger(__name__)
 
 
 class FilterLists(Cog):

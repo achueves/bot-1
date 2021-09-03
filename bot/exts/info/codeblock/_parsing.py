@@ -1,15 +1,15 @@
 """This module provides functions for parsing Markdown code blocks."""
 
 import ast
-import logging
 import re
 import textwrap
 from typing import NamedTuple, Optional, Sequence
 
 from bot import constants
 from bot.utils import has_lines
+from bot.utils.logging import get_logger
 
-log = logging.getLogger(__name__)
+log = get_logger(__name__)
 
 BACKTICK = "`"
 PY_LANG_CODES = ("python-repl", "python", "pycon", "py")  # Order is important; "py" is last cause it's a subset.

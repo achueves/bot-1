@@ -1,4 +1,3 @@
-import logging
 import re
 import typing as t
 from datetime import date, datetime
@@ -11,6 +10,7 @@ from discord.ext.tasks import loop
 
 from bot import constants
 from bot.bot import Bot
+from bot.utils.logging import get_logger
 from bot.utils.webhooks import send_webhook
 
 PEPS_RSS_URL = "https://www.python.org/dev/peps/peps.rss/"
@@ -22,7 +22,7 @@ THREAD_URL = "https://mail.python.org/archives/list/{list}@python.org/thread/{id
 
 AVATAR_URL = "https://www.python.org/static/opengraph-icon-200x200.png"
 
-log = logging.getLogger(__name__)
+log = get_logger(__name__)
 
 
 class PythonNews(Cog):

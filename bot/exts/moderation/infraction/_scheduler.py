@@ -1,4 +1,3 @@
-import logging
 import textwrap
 import typing as t
 from abc import abstractmethod
@@ -18,8 +17,9 @@ from bot.exts.moderation.infraction import _utils
 from bot.exts.moderation.modlog import ModLog
 from bot.utils import messages, scheduling, time
 from bot.utils.channel import is_mod_channel
+from bot.utils.logging import get_logger
 
-log = logging.getLogger(__name__)
+log = get_logger(__name__)
 
 
 class InfractionScheduler:

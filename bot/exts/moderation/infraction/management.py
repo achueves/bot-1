@@ -1,4 +1,3 @@
-import logging
 import textwrap
 import typing as t
 from datetime import datetime
@@ -19,9 +18,10 @@ from bot.exts.moderation.modlog import ModLog
 from bot.pagination import LinePaginator
 from bot.utils import messages, time
 from bot.utils.channel import is_mod_channel
+from bot.utils.logging import get_logger
 from bot.utils.time import humanize_delta, until_expiration
 
-log = logging.getLogger(__name__)
+log = get_logger(__name__)
 
 
 class ModManagement(commands.Cog):

@@ -1,6 +1,5 @@
 import asyncio
 import contextlib
-import logging
 import random
 import typing as t
 from datetime import timedelta
@@ -17,8 +16,9 @@ from bot.bot import Bot
 from bot.constants import Branding as BrandingConfig, Channels, Colours, Guild, MODERATION_ROLES
 from bot.decorators import mock_in_debug
 from bot.exts.backend.branding._repository import BrandingRepository, Event, RemoteObject
+from bot.utils.logging import get_logger
 
-log = logging.getLogger(__name__)
+log = get_logger(__name__)
 
 
 class AssetType(Enum):

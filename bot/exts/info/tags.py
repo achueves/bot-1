@@ -1,4 +1,3 @@
-import logging
 import re
 import time
 from pathlib import Path
@@ -11,9 +10,10 @@ from bot import constants
 from bot.bot import Bot
 from bot.converters import TagNameConverter
 from bot.pagination import LinePaginator
+from bot.utils.logging import get_logger
 from bot.utils.messages import wait_for_deletion
 
-log = logging.getLogger(__name__)
+log = get_logger(__name__)
 
 TEST_CHANNELS = (
     constants.Channels.bot_commands,

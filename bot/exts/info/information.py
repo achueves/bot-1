@@ -1,5 +1,4 @@
 import colorsys
-import logging
 import pprint
 import textwrap
 from collections import defaultdict
@@ -19,9 +18,10 @@ from bot.errors import NonExistentRoleError
 from bot.pagination import LinePaginator
 from bot.utils.channel import is_mod_channel, is_staff_channel
 from bot.utils.checks import cooldown_with_role_bypass, has_no_roles_check, in_whitelist_check
+from bot.utils.logging import get_logger
 from bot.utils.time import TimestampFormats, discord_timestamp, humanize_delta
 
-log = logging.getLogger(__name__)
+log = get_logger(__name__)
 
 
 class Information(Cog):

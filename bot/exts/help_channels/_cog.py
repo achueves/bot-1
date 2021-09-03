@@ -1,5 +1,4 @@
 import asyncio
-import logging
 import random
 import typing as t
 from datetime import timedelta
@@ -15,8 +14,9 @@ from bot.bot import Bot
 from bot.constants import Channels, RedirectOutput
 from bot.exts.help_channels import _caches, _channel, _message, _name, _stats
 from bot.utils import channel as channel_utils, lock, scheduling
+from bot.utils.logging import get_logger
 
-log = logging.getLogger(__name__)
+log = get_logger(__name__)
 
 NAMESPACE = "help"
 HELP_CHANNEL_TOPIC = """

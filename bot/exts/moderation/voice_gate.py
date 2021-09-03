@@ -1,5 +1,4 @@
 import asyncio
-import logging
 from contextlib import suppress
 from datetime import datetime, timedelta
 
@@ -15,8 +14,9 @@ from bot.constants import Channels, Event, MODERATION_ROLES, Roles, VoiceGate as
 from bot.decorators import has_no_roles, in_whitelist
 from bot.exts.moderation.modlog import ModLog
 from bot.utils.checks import InWhitelistCheckFailure
+from bot.utils.logging import get_logger
 
-log = logging.getLogger(__name__)
+log = get_logger(__name__)
 
 # Flag written to the cog's RedisCache as a value when the Member's (key) notification
 # was already removed ~ this signals both that no further notifications should be sent,

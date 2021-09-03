@@ -1,4 +1,3 @@
-import logging
 import textwrap
 import typing as t
 
@@ -14,9 +13,10 @@ from bot.converters import Duration, Expiry, MemberOrUser, UnambiguousMemberOrUs
 from bot.decorators import respect_role_hierarchy
 from bot.exts.moderation.infraction import _utils
 from bot.exts.moderation.infraction._scheduler import InfractionScheduler
+from bot.utils import logging
 from bot.utils.messages import format_user
 
-log = logging.getLogger(__name__)
+log = logging.get_logger(__name__)
 
 
 class Infractions(InfractionScheduler, commands.Cog):

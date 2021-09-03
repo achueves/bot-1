@@ -1,5 +1,4 @@
 import functools
-import logging
 import typing as t
 from enum import Enum
 
@@ -13,8 +12,9 @@ from bot.constants import Emojis, MODERATION_ROLES, Roles, URLs
 from bot.converters import Extension
 from bot.pagination import LinePaginator
 from bot.utils.extensions import EXTENSIONS
+from bot.utils.logging import get_logger
 
-log = logging.getLogger(__name__)
+log = get_logger(__name__)
 
 
 UNLOAD_BLACKLIST = {f"{exts.__name__}.utils.extensions", f"{exts.__name__}.moderation.modlog"}

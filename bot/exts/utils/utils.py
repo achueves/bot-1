@@ -1,5 +1,4 @@
 import difflib
-import logging
 import re
 import unicodedata
 from typing import Tuple, Union
@@ -14,9 +13,10 @@ from bot.converters import Snowflake
 from bot.decorators import in_whitelist
 from bot.pagination import LinePaginator
 from bot.utils import messages
+from bot.utils.logging import get_logger
 from bot.utils.time import time_since
 
-log = logging.getLogger(__name__)
+log = get_logger(__name__)
 
 ZEN_OF_PYTHON = """\
 Beautiful is better than ugly.

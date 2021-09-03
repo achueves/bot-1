@@ -1,6 +1,5 @@
 import asyncio
 import inspect
-import logging
 import types
 from collections import defaultdict
 from functools import partial
@@ -10,8 +9,9 @@ from weakref import WeakValueDictionary
 from bot.errors import LockedResourceError
 from bot.utils import function
 from bot.utils.function import command_wraps
+from bot.utils.logging import get_logger
 
-log = logging.getLogger(__name__)
+log = get_logger(__name__)
 __lock_dicts = defaultdict(WeakValueDictionary)
 
 _IdCallableReturn = Union[Hashable, Awaitable[Hashable]]

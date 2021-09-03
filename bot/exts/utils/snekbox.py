@@ -1,7 +1,6 @@
 import asyncio
 import contextlib
 import datetime
-import logging
 import re
 import textwrap
 from functools import partial
@@ -15,9 +14,10 @@ from bot.bot import Bot
 from bot.constants import Categories, Channels, Roles, URLs
 from bot.decorators import redirect_output
 from bot.utils import send_to_paste_service
+from bot.utils.logging import get_logger
 from bot.utils.messages import wait_for_deletion
 
-log = logging.getLogger(__name__)
+log = get_logger(__name__)
 
 ESCAPE_REGEX = re.compile("[`\u202E\u200B]{3,}")
 FORMATTED_CODE_REGEX = re.compile(
