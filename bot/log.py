@@ -3,6 +3,7 @@ import os
 import sys
 from logging import Logger, handlers
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 import coloredlogs
 import sentry_sdk
@@ -14,7 +15,13 @@ from bot import constants
 TRACE_LEVEL = 5
 
 
-class CustomLogger(Logger):
+if TYPE_CHECKING:
+    LoggerClass = Logger
+else:
+    LoggerClass = logging.getLoggerClass()
+
+
+class CustomLogger(LoggerClass):
     """Custom implementation of the `Logger` class with an added `trace` method."""
 
     def trace(self, msg: str, *args, **kwargs) -> None:
@@ -27,7 +34,7 @@ class CustomLogger(Logger):
         logger.trace("Houston, we have an %s", "interesting problem", exc_info=1)
         """
         if self.isEnabledFor(TRACE_LEVEL):
-            self._log(TRACE_LEVEL, msg, args, **kwargs)
+            self.log(TRACE_LEVEL, msg, *args, **kwargs)
 
 
 def setup() -> None:
@@ -58,7 +65,7 @@ def setup() -> None:
     if "COLOREDLOGS_LOG_FORMAT" not in os.environ:
         coloredlogs.DEFAULT_LOG_FORMAT = format_string
 
-    coloredlogs.install(level=logging.TRACE, logger=root_log, stream=sys.stdout)
+    coloredlogs.install(level=TRACE_LEVEL, logger=root_log, stream=sys.stdout)
 
     root_log.setLevel(logging.DEBUG if constants.DEBUG_MODE else logging.INFO)
     logging.getLogger("discord").setLevel(logging.WARNING)
@@ -104,13 +111,13 @@ def _set_trace_loggers() -> None:
     level_filter = constants.Bot.trace_loggers
     if level_filter:
         if level_filter.startswith("*"):
-            logging.getLogger().setLevel(logging.TRACE)
+            logging.getLogger().setLevel(TRACE_LEVEL)
 
         elif level_filter.startswith("!"):
-            logging.getLogger().setLevel(logging.TRACE)
+            logging.getLogger().setLevel(TRACE_LEVEL)
             for logger_name in level_filter.strip("!,").split(","):
                 logging.getLogger(logger_name).setLevel(logging.DEBUG)
 
         else:
             for logger_name in level_filter.strip(",").split(","):
-                logging.getLogger(logger_name).setLevel(logging.TRACE)
+                logging.getLogger(logger_name).setLevel(TRACE_LEVEL)
