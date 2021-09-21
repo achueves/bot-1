@@ -342,18 +342,40 @@ class TalentPool(Cog, name="Talentpool"):
             await ctx.send(":x: The specified user does not have an active nomination")
 
     @nomination_group.group(name='edit', aliases=('e',), invoke_without_command=True)
-    @has_any_role(*MODERATION_ROLES)
-    async def nomination_edit_group(self, ctx: Context) -> None:
-        """Commands to edit nominations."""
-        await ctx.send_help(ctx.command)
+    @has_any_role(*STAFF_ROLES)
+    async def nomination_edit_group(self, ctx: Context, target: Member, *, reason: str) -> None:
+        """
+        Commands to edit nominations.
+
+        Edits the reason of the authors nominee in a specific target's active nomination.
+        """
+        await self._edit_nomination_reason(ctx, target=target, actor=ctx.author, reason=reason)
 
     @nomination_edit_group.command(name='reason')
     @has_any_role(*MODERATION_ROLES)
     async def edit_reason_command(self, ctx: Context, nomination_id: int, actor: MemberOrUser, *, reason: str) -> None:
         """Edits the reason of a specific nominator in a specific active nomination."""
+        await self._edit_nomination_reason(ctx, target=nomination_id, actor=actor, reason=reason)
+
+    async def _edit_nomination_reason(
+        self,
+        ctx: Context,
+        target: Union[int, Member],
+        actor: MemberOrUser,
+        reason: str,
+    ) -> None:
+        """Edits a nomination reason in the database after validating the input."""
         if len(reason) > REASON_MAX_CHARS:
-            await ctx.send(f":x: Maxiumum allowed characters for the reason is {REASON_MAX_CHARS}.")
+            await ctx.send(f":x: Maximum allowed characters for the reason is {REASON_MAX_CHARS}.")
             return
+        if isinstance(target, Member):
+            if nomination := self.cache.get(target.id):
+                nomination_id = nomination["id"]
+            else:
+                await ctx.send("No active nomination found for that member.")
+                return
+        else:
+            nomination_id = target
 
         try:
             nomination = await self.bot.api_client.get(f"bot/nominations/{nomination_id}")
